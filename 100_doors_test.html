@@ -1,0 +1,15 @@
+<script src="100_doors.js"></script>
+
+<div id="doors">
+
+</div>
+<script>
+let acikKapilar = getFinalOpenedDoors(100);
+let text="";
+for (let i=0; i<acikKapilar.length; ++i)
+{
+	text += "Kapi: " + acikKapilar[i] + "<br/>";
+}
+console.log(text);
+document.getElementById("doors").innerHTML = text;
+</script>
