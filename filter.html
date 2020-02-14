@@ -1,0 +1,26 @@
+<script>
+
+function fn(){
+	alert('dsf');
+	console.log('fn');
+	var liste = [2,4,6,8,10];
+	var last = liste.filter(x => x >= 6);
+
+return last;	
+}
+
+</script>
+
+<div id="doors">
+fgfdg
+</div>
+<script>
+let acikKapilar = fn();
+let text="";
+for (let i=0; i<acikKapilar.length; ++i)
+{
+	text += "Kapi: " + acikKapilar[i] + "<br/>";
+}
+console.log(text);
+document.getElementById("doors").innerHTML = text;
+</script>
