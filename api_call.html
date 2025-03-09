@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<body>
+
+Offset: <input type="number" id="offset" value="100"/>
+
+Limit: <input type="number" id="limit" value="50"/>
+
+<button onclick="CallApi()">Submit</button>
+
+<div id="resultTable"></div>
+
+<script type="text/javascript">
+ 
+	function CallApi(){
+	
+		//window.alert("method called")
+		
+		let offset = document.getElementById("offset").value;
+		let limit = document.getElementById("limit").value;
+		
+		//https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/currency-codes/records?where=entity=%22TURKEY%22
+		//https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/currency-codes/records?where=alphabeticcode=%22USD%22
+		
+		var apiUrl = 'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/currency-codes/records?offset='+offset+'&limit='+limit;
+		fetch(apiUrl).then(response => {
+		return response.json();
+		}).then(data => {
+		// Work with JSON data here
+		console.log(data);
+		convertJSONToTable(sampleData);
+		}).catch(err => {
+		// Do something for an error here
+		});
+	};
+	
+	function convertJSONToTable(jsonData) {					
+		
+		let headers = Object.keys(jsonData[0]);		
+		
+		console.log(headers);
+		
+		let table = '<table border=1><thead><tr>';
+
+		headers.forEach(header => table += '<th>'+header+'</th>');
+		table += '</tr></thead><tbody>';
+
+		jsonData.forEach(row => {
+			table += '<tr>';
+			headers.forEach(header => table += '<td>'+row[header]+'</td>');
+			table += '</tr>';
+		});
+
+		table += '</tbody></table>';
+		
+		/*
+		
+		const myObj = JSON.parse(jsonData);
+		
+		console.log(myObj);
+		
+		let table = "<table border='1'>"
+		for (let x in myObj) {
+			table += "<tr><td>" + myObj[x].name + "</td></tr>";
+		}
+		table += "</table>"
+		
+		*/
+		
+		document.getElementById("resultTable").innerHTML = table;
+		
+		console.log("buraya geldi 3");
+	}
+	
+	const sampleData = [{
+      "entity": "BONAIRE, SINT EUSTATIUS AND SABA",
+      "currency": "US Dollar",
+      "alphabeticcode": "USD",
+      "numericcode": "840",
+      "minorunit": "2",
+      "withdrawaldate": null
+    },
+    {
+      "entity": "CAMEROON",
+      "currency": "CFA Franc BEAC",
+      "alphabeticcode": "XAF",
+      "numericcode": "950",
+      "minorunit": "0",
+      "withdrawaldate": null
+    },
+    {
+      "entity": "DJIBOUTI",
+      "currency": "Djibouti Franc",
+      "alphabeticcode": "DJF",
+      "numericcode": "262",
+      "minorunit": "0",
+      "withdrawaldate": null
+    },
+    {
+      "entity": "GUATEMALA",
+      "currency": "Quetzal",
+      "alphabeticcode": "GTQ",
+      "numericcode": "320",
+      "minorunit": "2",
+      "withdrawaldate": null
+    },
+    {
+      "entity": "IRELAND",
+      "currency": "Euro",
+      "alphabeticcode": "EUR",
+      "numericcode": "978",
+      "minorunit": "2",
+      "withdrawaldate": null
+    }
+	];
+	
+</script>
+
+</body>
+
+</html>
