@@ -10,6 +10,8 @@ Offset: <input type="number" id="offset" value="100"/>
 
 Limit: <input type="number" id="limit" value="50"/>
 
+Tarih: <input type="date" id="tarih" value="2024-12-31" />
+
 <button onclick="CallApi()">Submit</button>
 
 <div id="resultTable"></div>
@@ -19,6 +21,7 @@ Limit: <input type="number" id="limit" value="50"/>
 	function CallApi(){
 	
 		//window.alert("method called")
+		document.getElementById("tarih").valueAsDate = new Date("2025-12-31");
 		
 		let offset = document.getElementById("offset").value;
 		let limit = document.getElementById("limit").value;
